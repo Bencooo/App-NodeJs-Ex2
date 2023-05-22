@@ -30,3 +30,37 @@ module.exports.editPost = async (req, res) => {
   
     res.status(200).json(updatePost);
   };
+
+  module.exports.deletePost = async (req, res) => {
+    const post = await PostModel.findById(req.params.id);
+  
+    if (!post) {
+      res.status(400).json({ message: "Ce post n'existe pas" });
+    }
+    await post.deleteOne({ _id: post })
+    res.status(200).json("Message supprimé " + req.params.id);
+  };
+
+  module.exports.likePost = async (req, res) => {
+    try {
+      await PostModel.findByIdAndUpdate(
+        req.params.id,
+        { $addToSet: { likers: req.body.userId } },
+        { new: true }
+      ).then((data) => res.status(200).send(data));
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  };
+
+  module.exports.dislikePost = async (req, res) => {
+    try {
+      await PostModel.findByIdAndUpdate(
+        req.params.id,
+        { $pull: { likers: req.body.userId } },
+        { new: true }
+      ).then((data) => res.status(200).send(data));
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  };
