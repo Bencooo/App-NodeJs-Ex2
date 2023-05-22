@@ -8,15 +8,15 @@ const postSchema = mongoose.Schema(
         },
         author: {
             type: String,
-            require: true
+            require: true,
         },
         likers: {
             type: [String]
         },
     },
     {
-        timestramps: true
+        timestramps: true,
     }
 );
 
-    module.exports.mongoose.model('poste', postSchema)
+    module.exports = mongoose.model('post', postSchema)
