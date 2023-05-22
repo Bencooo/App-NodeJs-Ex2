@@ -17,4 +17,8 @@ router.delete('/:id', (req, res) => {
     res.json({ message: "post supprimé " + req.params.id});
 });
 
+router.patch("/like-post/:id", (req, res) => {
+    res.json({ message: "Post liké: id: " + req.params.id});
+});
+
 module.exports = router;
