@@ -9,4 +9,12 @@ router.post("/", (req, res) => {
     res.json({ message: req.body.message });
 });
 
-module.exports = router 
+router.put('/:id', (req, res) => {
+    res.json({ messageId: req.params.id});
+});
+
+router.delete('/:id', (req, res) => {
+    res.json({ message: "post supprimé " + req.params.id});
+});
+
+module.exports = router;
