@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
 
-app.use("/post", require("./routes/post.routes"));
+app.use("/product", require("./routes/product.routes"));
 
 //Start Server
 app.listen(port, () => console.log("Le Serveur a démarré au port " + port));
